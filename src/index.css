@@ -46,6 +46,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Touch-friendly horizontal scroll */
+@media (pointer: coarse) {
+  .snap-x {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,

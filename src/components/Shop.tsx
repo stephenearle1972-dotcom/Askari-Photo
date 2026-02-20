@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ShoppingCart } from 'lucide-react';
 
@@ -22,6 +22,14 @@ export function Shop({ onAddToCart }: { onAddToCart: (item: any) => void }) {
     'Metal Print': { 'A3': 2500, 'A2': 4500, 'A1': 7500, 'A0': 12000 },
     'Digital Download': { 'High-Res': 450 }
   };
+
+  useEffect(() => {
+    if (format === 'Digital Download') {
+      setSize('High-Res');
+    } else if (size === 'High-Res') {
+      setSize('A3');
+    }
+  }, [format]);
 
   const currentPrice = format === 'Digital Download' ? pricing[format]['High-Res'] : pricing[format][size];
 
