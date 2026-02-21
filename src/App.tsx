@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar, Footer, CustomCursor, Cart } from './components/Layout';
-import { Hero, Intro, Awards, Featured, BehindLens, Commissions, Instagram, Contact } from './components/Sections';
+import { Hero, Intro, Awards, BehindLens, Commissions, Instagram, Contact } from './components/Sections';
 import { Gallery } from './components/Gallery';
 import { Shop } from './components/Shop';
 
@@ -52,7 +52,6 @@ export default function App() {
         <Intro />
         <Awards />
         <Gallery onAddToCart={addToCart} />
-        <Featured />
         <Shop onAddToCart={addToCart} />
         <BehindLens />
         <Commissions />

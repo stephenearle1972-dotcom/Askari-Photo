@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Camera, MapPin, Mail, Phone, ArrowRight, Heart, Instagram as InstagramIcon } from 'lucide-react';
+import { Camera, MapPin, Mail, Phone, Heart, Instagram as InstagramIcon } from 'lucide-react';
+import { behindLensBlocks, instagramGrid } from '../data/catalog';
 
 const cld = (publicId: string, w: number) =>
   `https://res.cloudinary.com/dkn6tnxao/image/upload/c_scale,q_auto:good,w_${w}/v1/${publicId}`;
@@ -159,106 +160,14 @@ export function Awards() {
   );
 }
 
-export function Featured() {
-  const images = [
-    { id: 'askari/awards/IMG_7673-Edit', title: 'Crowned Eagle Portrait' },
-    { id: 'askari/wildlife/GY8F8547-Edit', title: 'Sunset Silhouette' },
-    { id: 'askari/awards/GY8F6108-Edit', title: 'Golden Light Encounter' },
-    { id: 'askari/wildlife/EF8A0589', title: 'Elephant Close-up' },
-    { id: 'askari/birdlife/GY8F9280-Edit', title: 'Fish Eagle' },
-  ];
-
-  return (
-    <section className="py-32 relative overflow-hidden">
-      <div className="absolute inset-0 z-0 opacity-20">
-        <img
-          src={cld('askari/wildlife/GY8F8784', 1920)}
-          alt="Background"
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-askari-black/80" />
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 mb-16">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="font-serif text-4xl md:text-5xl mb-6"
-        >
-          The Waterberg Collection
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="text-white/60 max-w-2xl leading-relaxed"
-        >
-          A curated series capturing the dramatic beauty of the Waterberg Biosphere — from misty mountain ridges to ancient rock formations, bushveld sunsets to the wildlife that calls this landscape home.
-        </motion.p>
-      </div>
-
-      <div className="relative z-10 flex overflow-x-auto no-scrollbar snap-x snap-mandatory pl-6 pr-6 md:pl-[10vw] md:pr-[10vw] gap-8 pb-12 scroll-pl-6 md:scroll-pl-[10vw]">
-        {images.map((img, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: i * 0.1 }}
-            className="min-w-[300px] md:min-w-[400px] aspect-[3/4] snap-center relative group overflow-hidden touch-pan-x"
-          >
-            <img
-              src={cld(img.id, 800)}
-              srcSet={srcSet(img.id)}
-              sizes="(max-width: 640px) 400px, 400px"
-              alt={img.title}
-              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
-              <span className="font-serif text-2xl tracking-wider translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{img.title}</span>
-            </div>
-          </motion.div>
-        ))}
-        <div className="min-w-[1px] shrink-0" aria-hidden="true" />
-      </div>
-
-      <div className="relative z-10 flex justify-center mt-8">
-        <a href="#gallery" className="flex items-center gap-3 uppercase tracking-widest text-sm text-askari-gold hover:text-askari-white transition-colors group">
-          View Full Collection
-          <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
-        </a>
-      </div>
-    </section>
-  );
-}
-
 export function BehindLens() {
-  const blocks = [
-    {
-      id: 'askari/wildlife/20100910_2400-Edit-5',
-      text: "The Waterberg is home. Every sunrise offers something the day before didn't."
-    },
-    {
-      id: 'askari/wildlife/EF8A8300',
-      text: "Patience is the most important piece of equipment. The bush rewards those who wait."
-    },
-    {
-      id: 'askari/wildlife/GY8F7836',
-      text: "Conservation isn't just a cause — it's the reason every image matters."
-    }
-  ];
-
   return (
     <section className="py-32 bg-[#080808]">
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="font-serif text-4xl text-center mb-24">Behind the Lens</h2>
 
         <div className="space-y-32">
-          {blocks.map((block, i) => (
+          {behindLensBlocks.map((block, i) => (
             <div key={i} className={`flex flex-col md:flex-row items-center gap-12 ${i % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
               <motion.div
                 initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
@@ -269,8 +178,8 @@ export function BehindLens() {
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
-                    src={cld(block.id, 800)}
-                    srcSet={srcSet(block.id)}
+                    src={cld(block.publicId, 800)}
+                    srcSet={srcSet(block.publicId)}
                     sizes="(max-width: 768px) 100vw, 50vw"
                     alt="Behind the lens"
                     className="w-full h-full object-cover"
@@ -380,17 +289,6 @@ export function Commissions() {
 }
 
 export function Instagram() {
-  const posts = [
-    { id: 'askari/awards/IMG_2967-Edit-Edit-Edit-3', title: 'Award-winning study' },
-    { id: 'askari/birdlife/GY8F9931-Edit', title: 'Waterberg raptor' },
-    { id: 'askari/wildlife/zebduel', title: 'Zebra duel' },
-    { id: 'askari/wildlife/EF8A0589', title: 'Elephant close-up' },
-    { id: 'askari/wildlife/GY8F0979', title: 'White rhino' },
-    { id: 'askari/birdlife/GY8F8687', title: 'Yellow-billed hornbill' },
-    { id: 'askari/wildlife/GY8F0535-Edit', title: 'Elephant crossing' },
-    { id: 'askari/awards/53240470-468404837', title: 'Leopard at dusk' },
-  ];
-
   return (
     <section className="py-24 bg-[#050505]">
       <div className="max-w-7xl mx-auto px-6 text-center mb-12">
@@ -399,7 +297,7 @@ export function Instagram() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-2 max-w-7xl mx-auto px-1 md:px-6">
-        {posts.map((post, i) => (
+        {instagramGrid.map((post, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, scale: 0.9 }}
@@ -409,8 +307,8 @@ export function Instagram() {
             className="aspect-square relative group overflow-hidden bg-white/5"
           >
             <img
-              src={cld(post.id, 400)}
-              srcSet={`${cld(post.id, 400)} 400w, ${cld(post.id, 800)} 800w`}
+              src={cld(post.publicId, 400)}
+              srcSet={`${cld(post.publicId, 400)} 400w, ${cld(post.publicId, 800)} 800w`}
               sizes="(max-width: 640px) 50vw, 25vw"
               alt={post.title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -457,14 +355,7 @@ export function Contact() {
 
   return (
     <section id="contact" className="relative py-32 bg-askari-black overflow-hidden">
-      <div className="absolute inset-0 z-0 opacity-10">
-        <img
-          src={cld('askari/wildlife/GY8F5890', 1920)}
-          alt="Background"
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
-      </div>
+      <div className="absolute inset-0 z-0 opacity-10 bg-gradient-to-br from-white/5 to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16">
         <div>
