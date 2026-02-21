@@ -8,15 +8,15 @@ export interface CatalogImage {
   aspect: 'portrait' | 'landscape';
 }
 
-// ── Gallery Categories (3 tabs: Awards, Mammals, Birdlife) ──────────────
-// B&W tab removed — those images live in the Fine Art Prints shop section.
+// ── Gallery Categories (4 tabs: Awards, Mammals, Birdlife, Black & White) ──
 
 export const galleryCategories: Record<string, CatalogImage[]> = {
   Awards: [
     { publicId: 'askari/awards/cheetah-family-climbing-tree-masai-mara', title: 'Cheetah Family Climbing Tree', aspect: 'portrait' },
     { publicId: 'askari/awards/GY8F6108-Edit', title: 'Ostrich Chick Portrait', aspect: 'landscape' },
     { publicId: 'askari/awards/IMG_2967-Edit-Edit-Edit-3', title: 'Sandpipers Fighting', aspect: 'portrait' },
-    { publicId: 'askari/awards/IMG_7673-Edit', title: 'Jackal vs Cape Vulture', aspect: 'portrait' },
+    { publicId: 'askari/awards/IMG_7673-Edit', title: 'African Spoonbill Silhouette', aspect: 'portrait' },
+    { publicId: 'askari/awards/53240470-468404837', title: 'Spoonbill in Flight', aspect: 'landscape' },
   ],
 
   Mammals: [
@@ -47,12 +47,37 @@ export const galleryCategories: Record<string, CatalogImage[]> = {
     { publicId: 'askari/wildlife/IMG_2509', title: 'Collared Sunbird on Flowers', aspect: 'landscape' },
     { publicId: 'askari/wildlife/IMG_5223', title: 'Black-headed Heron Hunting Squirrel', aspect: 'landscape' },
   ],
+
+  'Black & White': [
+    { publicId: 'askari/black-white/elephant-herd-at-waterhole-panoramic-bw-01', title: 'Elephant Herd Panoramic', aspect: 'landscape' },
+    { publicId: 'askari/black-white/lion-male-resting-eye-through-grass-01', title: 'Lion Eye Through Grass', aspect: 'landscape' },
+    { publicId: 'askari/black-white/elephant-cow-and-calf-misty-bw-01', title: 'Elephant Cow & Calf in Mist', aspect: 'landscape' },
+    { publicId: 'askari/black-white/burchells-zebra-stallions-fighting-dust-01', title: 'Zebra Stallions Fighting', aspect: 'landscape' },
+    { publicId: 'askari/black-white/plains-zebra-family-running-grassland-01', title: 'Zebra Family Running', aspect: 'landscape' },
+    { publicId: 'askari/black-white/blue-wildebeest-herd-silhouette-sunset-01', title: 'Wildebeest Silhouette at Sunset', aspect: 'landscape' },
+    { publicId: 'askari/black-white/heron-silhouette-in-flight-backlit-01', title: 'African Spoonbill Silhouette', aspect: 'landscape' },
+    { publicId: 'askari/black-white/EF8A0973-Edit', title: 'Wildlife Portrait I', aspect: 'landscape' },
+    { publicId: 'askari/black-white/EF8A2310-Edit', title: 'Wildlife Portrait II', aspect: 'portrait' },
+    { publicId: 'askari/black-white/EF8A4422-Edit', title: 'Wildlife Landscape I', aspect: 'landscape' },
+    { publicId: 'askari/black-white/EF8A5330-Edit', title: 'Wildlife Portrait III', aspect: 'portrait' },
+    { publicId: 'askari/black-white/EF8A6327-Edit', title: 'Wildlife Portrait IV', aspect: 'portrait' },
+    { publicId: 'askari/black-white/EF8A7921-Edit', title: 'Wildlife Panoramic', aspect: 'landscape' },
+    { publicId: 'askari/black-white/EF8A8319-Edit', title: 'Wildlife Landscape II', aspect: 'landscape' },
+    { publicId: 'askari/black-white/EF8A9381-Edit', title: 'Wildlife Landscape III', aspect: 'landscape' },
+    { publicId: 'askari/black-white/GY8F0370-Edit', title: 'Wildlife Landscape IV', aspect: 'landscape' },
+    { publicId: 'askari/black-white/GY8F3869-Edit', title: 'Wildlife Portrait V', aspect: 'portrait' },
+    { publicId: 'askari/black-white/GY8F4476-Edit', title: 'Wildlife Landscape V', aspect: 'landscape' },
+    { publicId: 'askari/black-white/GY8F5271-Edit-Edit', title: 'Wildlife Portrait VI', aspect: 'portrait' },
+    { publicId: 'askari/black-white/GY8F9172-Edit', title: 'Wildlife Portrait VII', aspect: 'portrait' },
+    { publicId: 'askari/black-white/IMG_0178-Edit', title: 'Wildlife Portrait VIII', aspect: 'portrait' },
+    { publicId: 'askari/black-white/IMG_2071-Edit-Edit-2', title: 'Wildlife Portrait IX', aspect: 'portrait' },
+  ],
 };
 
 export const galleryCategoryNames = Object.keys(galleryCategories);
 
 // ── Fine Art B&W Prints (Shop) ──────────────────────────────────────────
-// All 7 dedicated B&W images from askari/black-white/ folder.
+// All 22 B&W images from askari/black-white/ folder. B&W ONLY.
 
 export const fineArtPrints = [
   {
@@ -104,10 +129,115 @@ export const fineArtPrints = [
     basePrice: 1200,
     description: 'An African spoonbill in flight, silhouetted against a luminous backlit sky. Archival museum-quality print.',
   },
+  {
+    id: 'bw-7',
+    publicId: 'askari/black-white/EF8A0973-Edit',
+    title: 'Bushveld Study I',
+    basePrice: 1200,
+    description: 'A striking black and white study from the African bushveld. Museum-quality archival print with exceptional tonal range.',
+  },
+  {
+    id: 'bw-8',
+    publicId: 'askari/black-white/EF8A2310-Edit',
+    title: 'African Portrait I',
+    basePrice: 1200,
+    description: 'An evocative portrait composition rendered in rich black and white. Printed on heavyweight archival fine art paper.',
+  },
+  {
+    id: 'bw-9',
+    publicId: 'askari/black-white/EF8A4422-Edit',
+    title: 'Savanna Moment I',
+    basePrice: 1200,
+    description: 'A compelling scene from the African savanna captured in dramatic monochrome. Museum-quality archival print.',
+  },
+  {
+    id: 'bw-10',
+    publicId: 'askari/black-white/EF8A5330-Edit',
+    title: 'African Portrait II',
+    basePrice: 1200,
+    description: 'A powerful wildlife portrait in classic black and white. Premium archival fine art print with exquisite detail.',
+  },
+  {
+    id: 'bw-11',
+    publicId: 'askari/black-white/EF8A6327-Edit',
+    title: 'African Portrait III',
+    basePrice: 1200,
+    description: 'An intimate wildlife portrait with rich tonal depth. Printed on museum-grade archival paper.',
+  },
+  {
+    id: 'bw-12',
+    publicId: 'askari/black-white/EF8A7921-Edit',
+    title: 'Bushveld Panoramic',
+    basePrice: 1200,
+    description: 'A wide panoramic composition from the African bushveld rendered in dramatic monochrome. Archival museum-quality print.',
+  },
+  {
+    id: 'bw-13',
+    publicId: 'askari/black-white/EF8A8319-Edit',
+    title: 'Savanna Moment II',
+    basePrice: 1200,
+    description: 'A captivating wildlife moment in the savanna, rendered in rich black and white. Heavyweight archival paper.',
+  },
+  {
+    id: 'bw-14',
+    publicId: 'askari/black-white/EF8A9381-Edit',
+    title: 'Bushveld Study II',
+    basePrice: 1200,
+    description: 'A beautifully composed scene from the bushveld in classic monochrome. Museum-quality archival fine art print.',
+  },
+  {
+    id: 'bw-15',
+    publicId: 'askari/black-white/GY8F0370-Edit',
+    title: 'Waterberg Study I',
+    basePrice: 1200,
+    description: 'A striking composition from the Waterberg region in dramatic black and white. Printed on premium archival paper.',
+  },
+  {
+    id: 'bw-16',
+    publicId: 'askari/black-white/GY8F3869-Edit',
+    title: 'Waterberg Portrait I',
+    basePrice: 1200,
+    description: 'An evocative wildlife portrait from the Waterberg. Museum-quality archival print with exceptional tonal depth.',
+  },
+  {
+    id: 'bw-17',
+    publicId: 'askari/black-white/GY8F4476-Edit',
+    title: 'Waterberg Study II',
+    basePrice: 1200,
+    description: 'A powerful scene from the Waterberg captured in rich monochrome. Premium archival fine art print.',
+  },
+  {
+    id: 'bw-18',
+    publicId: 'askari/black-white/GY8F5271-Edit-Edit',
+    title: 'Waterberg Portrait II',
+    basePrice: 1200,
+    description: 'An intimate portrait composition from the Waterberg in classic black and white. Museum-quality archival paper.',
+  },
+  {
+    id: 'bw-19',
+    publicId: 'askari/black-white/GY8F9172-Edit',
+    title: 'Waterberg Portrait III',
+    basePrice: 1200,
+    description: 'A striking wildlife portrait from the Waterberg region. Archival museum-quality print with rich detail.',
+  },
+  {
+    id: 'bw-20',
+    publicId: 'askari/black-white/IMG_0178-Edit',
+    title: 'Kruger Portrait I',
+    basePrice: 1200,
+    description: 'A powerful portrait captured in the Greater Kruger in dramatic monochrome. Printed on heavyweight archival paper.',
+  },
+  {
+    id: 'bw-21',
+    publicId: 'askari/black-white/IMG_2071-Edit-Edit-2',
+    title: 'Kruger Portrait II',
+    basePrice: 1200,
+    description: 'An evocative wildlife portrait from the Greater Kruger rendered in rich black and white. Museum-quality archival print.',
+  },
 ];
 
 // ── Colour Prints (Shop) ────────────────────────────────────────────────
-// 8 colour images NOT used in Gallery, Behind Lens, Instagram, or Awards.
+// 18 colour images NOT used in Gallery, Behind Lens, Instagram, or Awards.
 
 export const colourPrints = [
   {
@@ -150,7 +280,7 @@ export const colourPrints = [
     publicId: 'askari/wildlife/EF8A2819',
     title: 'Lion Male Yawning',
     basePrice: 1200,
-    description: 'A powerful male lion mid-yawn, revealing the full might of Africa\'s apex predator. Museum-quality archival print.',
+    description: "A powerful male lion mid-yawn, revealing the full might of Africa's apex predator. Museum-quality archival print.",
   },
   {
     id: 'colour-6',
@@ -165,6 +295,78 @@ export const colourPrints = [
     title: 'White Rhino Calf Running',
     basePrice: 1200,
     description: 'A white rhinoceros calf charging through golden grass. Printed on heavyweight archival paper with exceptional detail.',
+  },
+  // New additions from unused Cloudinary images
+  {
+    id: 'colour-8',
+    publicId: 'askari/wildlife/GY8F8547-Edit',
+    title: 'Elephant Herd at Sunset',
+    basePrice: 1200,
+    description: 'An elephant herd silhouetted against the golden light of sunset. Panoramic archival museum-quality print.',
+  },
+  {
+    id: 'colour-9',
+    publicId: 'askari/wildlife/IMG_9123-Edit',
+    title: 'Wildlife in Golden Light',
+    basePrice: 1200,
+    description: 'A stunning wildlife scene bathed in warm golden light. Museum-quality archival print with exceptional tonal depth.',
+  },
+  {
+    id: 'colour-10',
+    publicId: 'askari/wildlife/GY8F0979',
+    title: 'Lion Pride Resting',
+    basePrice: 1200,
+    description: 'A tranquil scene of a lion pride at rest in the African bushveld. Premium archival fine art print.',
+  },
+  {
+    id: 'colour-11',
+    publicId: 'askari/wildlife/IMG_5395',
+    title: 'Lion Eye Through Grass',
+    basePrice: 1200,
+    description: 'The watchful eye of a male lion peering through golden grass. Vivid colour fine art print on archival paper.',
+  },
+  // New uploads from Website Ready
+  {
+    id: 'colour-12',
+    publicId: 'askari/wildlife/leopard-in-tree-looking-at-camera-01',
+    title: 'Leopard in Tree',
+    basePrice: 1200,
+    description: 'A leopard draped over a tree branch, eyes locked on the camera. Museum-quality archival print capturing raw predator presence.',
+  },
+  {
+    id: 'colour-13',
+    publicId: 'askari/wildlife/leopard-standing-on-branch-01',
+    title: 'Leopard on Branch',
+    basePrice: 1200,
+    description: 'A leopard standing confidently on a branch, surveying its territory. Premium archival fine art print.',
+  },
+  {
+    id: 'colour-14',
+    publicId: 'askari/wildlife/african-elephant-family-walking-dusk-01',
+    title: 'Elephant Family at Dusk',
+    basePrice: 1200,
+    description: 'An elephant family walking together through the golden light of dusk. Museum-quality archival print with exceptional warmth.',
+  },
+  {
+    id: 'colour-15',
+    publicId: 'askari/wildlife/lion-male-snarling-close-up-artistic-01',
+    title: 'Lion Male Snarling Close-up',
+    basePrice: 1200,
+    description: 'An intense close-up of a snarling male lion, captured in dramatic artistic detail. Heavyweight archival paper.',
+  },
+  {
+    id: 'colour-16',
+    publicId: 'askari/birdlife/african-fish-eagle-in-flight-over-water-01',
+    title: 'African Fish Eagle in Flight',
+    basePrice: 1200,
+    description: 'An African fish eagle soaring over the water with talons extended. Vivid colour fine art print on archival paper.',
+  },
+  {
+    id: 'colour-17',
+    publicId: 'askari/birdlife/common-ostrich-chick-close-up-burnt-01',
+    title: 'Ostrich Chick Close-up',
+    basePrice: 1200,
+    description: 'An intimate close-up portrait of a young ostrich chick. Museum-quality archival print capturing delicate detail.',
   },
 ];
 

@@ -114,8 +114,6 @@ export function Awards() {
     "Work selected for fine-art prints and commercial collections"
   ];
 
-  const CERTIFICATES_IMAGE = 'askari/awards/20101013_8889-Edit-3';
-
   return (
     <section id="awards" className="py-24 bg-[#0A0A0A] border-y border-white/5 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 mb-12">
@@ -136,25 +134,6 @@ export function Awards() {
           </motion.div>
         ))}
         <div className="min-w-[1px] shrink-0" aria-hidden="true" />
-      </div>
-
-      <div className="max-w-4xl mx-auto px-6 mt-12">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-        >
-          <img
-            src={cld(CERTIFICATES_IMAGE, 1200)}
-            srcSet={srcSet(CERTIFICATES_IMAGE)}
-            sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
-            alt="Framed Fujifilm/Getaway photographic award certificates"
-            className="w-full h-auto object-cover border border-white/10"
-            loading="lazy"
-          />
-          <p className="text-center text-xs text-white/40 mt-4 tracking-widest uppercase">Framed Award Certificates</p>
-        </motion.div>
       </div>
     </section>
   );
