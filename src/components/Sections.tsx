@@ -2,13 +2,23 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Camera, MapPin, Mail, Phone, ArrowRight, Heart, Instagram as InstagramIcon } from 'lucide-react';
 
+const cld = (publicId: string, w: number) =>
+  `https://res.cloudinary.com/dkn6tnxao/image/upload/c_scale,q_auto:good,w_${w}/v1/${publicId}`;
+
+const srcSet = (publicId: string) =>
+  `${cld(publicId, 400)} 400w, ${cld(publicId, 800)} 800w, ${cld(publicId, 1200)} 1200w, ${cld(publicId, 1920)} 1920w`;
+
+const HERO_IMAGE = 'askari/awards/IMG_2967-Edit-Edit-Edit-3';
+
 export function Hero() {
   return (
     <section className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-askari-black">
       <div className="absolute inset-0 z-0">
         <img
-          src="https://picsum.photos/seed/askarihero/1920/1080"
-          alt="African Wildlife"
+          src={cld(HERO_IMAGE, 1920)}
+          srcSet={srcSet(HERO_IMAGE)}
+          sizes="100vw"
+          alt="Award-winning wildlife photography by Stephen Earle"
           className="w-full h-full object-cover animate-kenburns opacity-60"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-askari-black" />
@@ -85,7 +95,7 @@ export function Intro() {
           transition={{ duration: 1, delay: 0.8 }}
           className="text-white/60 leading-relaxed text-sm md:text-base"
         >
-          Based in the Waterberg bushveld of Limpopo, Askari Photography documents the wildlife, landscapes, and raw beauty of southern Africa. With multiple photography awards and thousands of hours in the field, every image is a testament to the wild places we fight to protect.
+          Award-winning South African wildlife photographer with 17 years of field experience, including a decade photographing the Greater Kruger region and the last three years based in the Waterberg area near Vaalwater. Before dedicating myself full-time to wildlife photography, I practised as an attorney for more than 30 years — a background that shaped my approach: professional, calm, detail-oriented, and confident with international clients and high-expectation travellers. My work has earned multiple awards, has been widely published, and has been independently recognised for its artistic, commercial, and rarity value. I maintain a catalogue of more than 250,000 wildlife images, built across nearly two decades of dedicated fieldwork.
         </motion.p>
       </div>
     </section>
@@ -94,12 +104,16 @@ export function Intro() {
 
 export function Awards() {
   const awards = [
-    "Wildlife Photographer of the Year — Highly Commended",
-    "Africa Geographic Photographer of the Year — Top 10",
-    "Getaway Gallery Gold Award",
-    "Waterberg Living — Featured Artist",
-    "PSSA Salon Honours"
+    "Fujifilm/Getaway Photographic Awards 2009 — Animal Behaviour — Certificate",
+    "Fujifilm/Getaway Photographic Awards 2010 — Sasol Birds — Certificate",
+    "Fujifilm/Getaway Photographic Awards 2010 — Sasol Birds — Winner",
+    "Fujifilm/Getaway Photographic Awards 2011 — Birds — Certificate",
+    "Fujifilm/Getaway Photographic Awards 2011 — Animal Behaviour — Certificate",
+    "Published in South African & international wildlife platforms",
+    "Work selected for fine-art prints and commercial collections"
   ];
+
+  const CERTIFICATES_IMAGE = 'askari/awards/20101013_8889-Edit-3';
 
   return (
     <section id="awards" className="py-24 bg-[#0A0A0A] border-y border-white/5 overflow-hidden">
@@ -122,23 +136,47 @@ export function Awards() {
         ))}
         <div className="min-w-[1px] shrink-0" aria-hidden="true" />
       </div>
+
+      <div className="max-w-4xl mx-auto px-6 mt-12">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <img
+            src={cld(CERTIFICATES_IMAGE, 1200)}
+            srcSet={srcSet(CERTIFICATES_IMAGE)}
+            sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
+            alt="Framed Fujifilm/Getaway photographic award certificates"
+            className="w-full h-auto object-cover border border-white/10"
+            loading="lazy"
+          />
+          <p className="text-center text-xs text-white/40 mt-4 tracking-widest uppercase">Framed Award Certificates</p>
+        </motion.div>
+      </div>
     </section>
   );
 }
 
 export function Featured() {
   const images = [
-    "https://picsum.photos/seed/waterberg1/800/1000",
-    "https://picsum.photos/seed/waterberg2/800/1000",
-    "https://picsum.photos/seed/waterberg3/800/1000",
-    "https://picsum.photos/seed/waterberg4/800/1000",
-    "https://picsum.photos/seed/waterberg5/800/1000",
+    { id: 'askari/awards/IMG_7673-Edit', title: 'Crowned Eagle Portrait' },
+    { id: 'askari/wildlife/GY8F8547-Edit', title: 'Sunset Silhouette' },
+    { id: 'askari/awards/GY8F6108-Edit', title: 'Golden Light Encounter' },
+    { id: 'askari/wildlife/EF8A0589', title: 'Elephant Close-up' },
+    { id: 'askari/birdlife/GY8F9280-Edit', title: 'Fish Eagle' },
   ];
 
   return (
     <section className="py-32 relative overflow-hidden">
       <div className="absolute inset-0 z-0 opacity-20">
-        <img src="https://picsum.photos/seed/bgfeatured/1920/1080" alt="Background" className="w-full h-full object-cover" loading="lazy" />
+        <img
+          src={cld('askari/wildlife/GY8F8784', 1920)}
+          alt="Background"
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
         <div className="absolute inset-0 bg-askari-black/80" />
       </div>
 
@@ -163,7 +201,7 @@ export function Featured() {
       </div>
 
       <div className="relative z-10 flex overflow-x-auto no-scrollbar snap-x snap-mandatory pl-6 pr-6 md:pl-[10vw] md:pr-[10vw] gap-8 pb-12 scroll-pl-6 md:scroll-pl-[10vw]">
-        {images.map((src, i) => (
+        {images.map((img, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, scale: 0.9 }}
@@ -172,9 +210,16 @@ export function Featured() {
             transition={{ duration: 0.8, delay: i * 0.1 }}
             className="min-w-[300px] md:min-w-[400px] aspect-[3/4] snap-center relative group overflow-hidden touch-pan-x"
           >
-            <img src={src} alt="Waterberg Collection" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" loading="lazy" />
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-              <span className="font-serif text-2xl tracking-wider translate-y-4 group-hover:translate-y-0 transition-transform duration-500">View Image</span>
+            <img
+              src={cld(img.id, 800)}
+              srcSet={srcSet(img.id)}
+              sizes="(max-width: 640px) 400px, 400px"
+              alt={img.title}
+              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+              <span className="font-serif text-2xl tracking-wider translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{img.title}</span>
             </div>
           </motion.div>
         ))}
@@ -182,10 +227,10 @@ export function Featured() {
       </div>
 
       <div className="relative z-10 flex justify-center mt-8">
-        <button className="flex items-center gap-3 uppercase tracking-widest text-sm text-askari-gold hover:text-askari-white transition-colors group">
+        <a href="#gallery" className="flex items-center gap-3 uppercase tracking-widest text-sm text-askari-gold hover:text-askari-white transition-colors group">
           View Full Collection
           <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
-        </button>
+        </a>
       </div>
     </section>
   );
@@ -194,15 +239,15 @@ export function Featured() {
 export function BehindLens() {
   const blocks = [
     {
-      img: "https://picsum.photos/seed/behind1/800/600",
+      id: 'askari/wildlife/20100910_2400-Edit-5',
       text: "The Waterberg is home. Every sunrise offers something the day before didn't."
     },
     {
-      img: "https://picsum.photos/seed/behind2/800/600",
+      id: 'askari/wildlife/EF8A8300',
       text: "Patience is the most important piece of equipment. The bush rewards those who wait."
     },
     {
-      img: "https://picsum.photos/seed/behind3/800/600",
+      id: 'askari/wildlife/GY8F7836',
       text: "Conservation isn't just a cause — it's the reason every image matters."
     }
   ];
@@ -223,7 +268,14 @@ export function BehindLens() {
                 className="w-full md:w-1/2"
               >
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img src={block.img} alt="Behind the lens" className="w-full h-full object-cover" loading="lazy" />
+                  <img
+                    src={cld(block.id, 800)}
+                    srcSet={srcSet(block.id)}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    alt="Behind the lens"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
               </motion.div>
               <motion.div
@@ -247,11 +299,14 @@ export function BehindLens() {
 
 export function Commissions() {
   const services = [
-    "Lodge & Property Photography",
-    "Wildlife Safari Photography Experiences",
-    "Commercial & Editorial Assignments",
-    "Conservation & Research Documentation",
-    "Aerial/Drone Photography"
+    { name: "Freelance Photographic Hosting on Game Drives", desc: "Calm, expert, in-vehicle photographic coaching on scheduled drives. All skill levels supported." },
+    { name: "Private Guest Photographic Guiding", desc: "Exclusive one-on-one or family photographic safaris for VIP and high-expectation clients." },
+    { name: "Guide & Staff Photography Enrichment", desc: "Short, high-impact training for lodge guiding teams on light, positioning, and guest support." },
+    { name: "Lightroom & Photoshop Teaching", desc: "Private or small-group editing sessions for guests or staff, between drives or as evening activities." },
+    { name: "Lodge Wildlife Content Creation", desc: "High-quality imagery for marketing, websites, social media, and guest welcome packs." },
+    { name: "Guest Photoshoots & Lodge Lifestyle Photography", desc: "Professional portrait sessions for families, couples, honeymooners. 20–45 edited images, same-day delivery available." },
+    { name: "Safari Story Packages", desc: "Complete visual narratives delivered over 2–5 days." },
+    { name: "On-drive Guest Portraits & Candid Coverage", desc: "Natural, candid storytelling during game drives." }
   ];
 
   return (
@@ -272,10 +327,10 @@ export function Commissions() {
           transition={{ delay: 0.2 }}
           className="text-white/60 mb-16 leading-relaxed"
         >
-          Available for private wildlife photography safaris, lodge and property shoots, commercial assignments, and conservation documentation projects.
+          Available for private wildlife photography safaris, lodge and property shoots, photographic hosting, and bespoke safari experiences across the Waterberg and Greater Kruger.
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-12">
           {services.map((service, i) => (
             <motion.div
               key={i}
@@ -283,40 +338,68 @@ export function Commissions() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 + (i * 0.1) }}
-              className="bg-white/5 p-6 border border-white/10 flex items-center gap-4"
+              className="bg-white/5 p-6 border border-white/10"
             >
-              <Camera className="text-askari-gold shrink-0" size={24} />
-              <span className="font-serif text-lg">{service}</span>
+              <div className="flex items-start gap-4">
+                <Camera className="text-askari-gold shrink-0 mt-1" size={24} />
+                <div>
+                  <h3 className="font-serif text-lg mb-2">{service.name}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">{service.desc}</p>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
 
-        <motion.button
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6 }}
+          className="mb-12"
+        >
+          <h3 className="uppercase tracking-widest text-xs font-semibold mb-4 text-askari-gold">Regions Covered</h3>
+          <p className="text-white/50 text-sm leading-relaxed max-w-2xl mx-auto">
+            Welgevonden Game Reserve &bull; Marakele National Park &bull; Lapalala Wilderness &bull; Mabula & Mabalingwe &bull; Klaserie, Manyeleti, Balule, Karongwe (Greater Kruger corridor) &bull; Greater Kruger & Mpumalanga &bull; East Africa & Botswana
+          </p>
+        </motion.div>
+
+        <motion.a
+          href="#contact"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.8 }}
-          className="border border-askari-gold text-askari-gold px-8 py-4 uppercase tracking-widest text-sm hover:bg-askari-gold hover:text-askari-black transition-colors"
+          className="inline-block border border-askari-gold text-askari-gold px-8 py-4 uppercase tracking-widest text-sm hover:bg-askari-gold hover:text-askari-black transition-colors"
         >
           Enquire About a Commission
-        </motion.button>
+        </motion.a>
       </div>
     </section>
   );
 }
 
 export function Instagram() {
-  const posts = Array.from({ length: 8 }).map((_, i) => `https://picsum.photos/seed/insta${i}/400/400`);
+  const posts = [
+    { id: 'askari/awards/IMG_2967-Edit-Edit-Edit-3', title: 'Award-winning study' },
+    { id: 'askari/birdlife/GY8F9931-Edit', title: 'Waterberg raptor' },
+    { id: 'askari/wildlife/zebduel', title: 'Zebra duel' },
+    { id: 'askari/wildlife/EF8A0589', title: 'Elephant close-up' },
+    { id: 'askari/wildlife/GY8F0979', title: 'White rhino' },
+    { id: 'askari/birdlife/GY8F8687', title: 'Yellow-billed hornbill' },
+    { id: 'askari/wildlife/GY8F0535-Edit', title: 'Elephant crossing' },
+    { id: 'askari/awards/53240470-468404837', title: 'Leopard at dusk' },
+  ];
 
   return (
     <section className="py-24 bg-[#050505]">
       <div className="max-w-7xl mx-auto px-6 text-center mb-12">
         <h2 className="font-serif text-3xl mb-2">Follow the Journey</h2>
-        <p className="text-askari-gold tracking-widest uppercase text-sm">@askariphotography</p>
+        <a href="https://www.instagram.com/askariphotography/" target="_blank" rel="noopener noreferrer" className="text-askari-gold tracking-widest uppercase text-sm hover:text-askari-white transition-colors">@askariphotography</a>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-2 max-w-7xl mx-auto px-1 md:px-6">
-        {posts.map((src, i) => (
+        {posts.map((post, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, scale: 0.9 }}
@@ -325,11 +408,17 @@ export function Instagram() {
             transition={{ duration: 0.5, delay: i * 0.05 }}
             className="aspect-square relative group overflow-hidden bg-white/5"
           >
-            <img src={src} alt="Instagram post" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+            <img
+              src={cld(post.id, 400)}
+              srcSet={`${cld(post.id, 400)} 400w, ${cld(post.id, 800)} 800w`}
+              sizes="(max-width: 640px) 50vw, 25vw"
+              alt={post.title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
+            />
             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
               <div className="flex items-center gap-2 text-white">
                 <Heart size={20} className="fill-white" />
-                <span className="font-medium">{Math.floor(Math.random() * 500) + 100}</span>
               </div>
             </div>
           </motion.div>
@@ -337,9 +426,9 @@ export function Instagram() {
       </div>
 
       <div className="text-center mt-12">
-        <button className="flex items-center gap-2 mx-auto uppercase tracking-widest text-sm hover:text-askari-gold transition-colors">
+        <a href="https://www.instagram.com/askariphotography/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 mx-auto justify-center uppercase tracking-widest text-sm hover:text-askari-gold transition-colors">
           <InstagramIcon size={16} /> Follow on Instagram
-        </button>
+        </a>
       </div>
     </section>
   );
@@ -369,7 +458,12 @@ export function Contact() {
   return (
     <section id="contact" className="relative py-32 bg-askari-black overflow-hidden">
       <div className="absolute inset-0 z-0 opacity-10">
-        <img src="https://picsum.photos/seed/contactbg/1920/1080" alt="Background" className="w-full h-full object-cover" loading="lazy" />
+        <img
+          src={cld('askari/wildlife/GY8F5890', 1920)}
+          alt="Background"
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16">
@@ -409,6 +503,8 @@ export function Contact() {
                 <option value="" disabled selected>Enquiry Type</option>
                 <option value="print" className="bg-askari-black text-white">Print Order Query</option>
                 <option value="commission" className="bg-askari-black text-white">Commission Request</option>
+                <option value="hosting" className="bg-askari-black text-white">Photographic Hosting</option>
+                <option value="guiding" className="bg-askari-black text-white">Private Guiding</option>
                 <option value="collab" className="bg-askari-black text-white">Collaboration</option>
                 <option value="general" className="bg-askari-black text-white">General</option>
               </select>
@@ -425,21 +521,21 @@ export function Contact() {
             <MapPin className="text-askari-gold shrink-0 mt-1" size={24} />
             <div>
               <h3 className="uppercase tracking-widest text-sm font-semibold mb-1">Location</h3>
-              <p className="text-white/60">Waterberg, Limpopo<br/>South Africa</p>
+              <p className="text-white/60">Waterberg, Vaalwater, Limpopo<br/>South Africa</p>
             </div>
           </div>
           <div className="flex items-start gap-4">
             <Mail className="text-askari-gold shrink-0 mt-1" size={24} />
             <div>
               <h3 className="uppercase tracking-widest text-sm font-semibold mb-1">Email</h3>
-              <p className="text-white/60">info@askariphotography.co.za</p>
+              <a href="mailto:spe@heatt.co.za" className="text-white/60 hover:text-askari-gold transition-colors">spe@heatt.co.za</a>
             </div>
           </div>
           <div className="flex items-start gap-4">
             <Phone className="text-askari-gold shrink-0 mt-1" size={24} />
             <div>
               <h3 className="uppercase tracking-widest text-sm font-semibold mb-1">WhatsApp</h3>
-              <p className="text-white/60">+27 (0) 82 123 4567</p>
+              <a href="https://wa.me/27714229928" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-askari-gold transition-colors">+27 071 422 9928</a>
             </div>
           </div>
         </div>

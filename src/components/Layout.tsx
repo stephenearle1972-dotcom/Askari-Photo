@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingCart, Menu, X, Instagram, Facebook, Twitter, ArrowUp } from 'lucide-react';
+import { ShoppingCart, Menu, X, Instagram, Facebook, ArrowUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export function CustomCursor() {
@@ -9,10 +9,10 @@ export function CustomCursor() {
 
   useEffect(() => {
     setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
-    
+
     const updatePosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
-      
+
       const target = e.target as HTMLElement;
       if (target.tagName.toLowerCase() === 'img' || target.closest('button') || target.closest('a')) {
         setIsHovering(true);
@@ -20,7 +20,7 @@ export function CustomCursor() {
         setIsHovering(false);
       }
     };
-    
+
     window.addEventListener('mousemove', updatePosition);
     return () => window.removeEventListener('mousemove', updatePosition);
   }, []);
@@ -66,7 +66,7 @@ export function Navbar({ cartCount, onOpenCart }: { cartCount: number, onOpenCar
       <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-askari-black/90 backdrop-blur-md py-4 shadow-lg shadow-black/50' : 'bg-transparent py-6'}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <a href="#" className="font-serif text-2xl tracking-[0.2em] text-askari-white uppercase">Askari</a>
-          
+
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map(link => (
               <a key={link.name} href={link.href} className="text-sm uppercase tracking-widest hover:text-askari-gold transition-colors">
@@ -101,7 +101,7 @@ export function Navbar({ cartCount, onOpenCart }: { cartCount: number, onOpenCar
 
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: '-100%' }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '-100%' }}
@@ -113,9 +113,9 @@ export function Navbar({ cartCount, onOpenCart }: { cartCount: number, onOpenCar
             </button>
             <div className="flex flex-col items-center space-y-8">
               {navLinks.map(link => (
-                <a 
-                  key={link.name} 
-                  href={link.href} 
+                <a
+                  key={link.name}
+                  href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="font-serif text-3xl tracking-widest uppercase hover:text-askari-gold transition-colors"
                 >
@@ -137,12 +137,12 @@ export function Cart({ isOpen, onClose, items, onRemove }: any) {
     <AnimatePresence>
       {isOpen && (
         <>
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[70]"
             onClick={onClose}
           />
-          <motion.div 
+          <motion.div
             initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             className="fixed top-0 right-0 h-full w-full max-w-md bg-askari-black border-l border-white/10 z-[80] flex flex-col"
@@ -151,7 +151,7 @@ export function Cart({ isOpen, onClose, items, onRemove }: any) {
               <h2 className="font-serif text-2xl tracking-wider">Your Cart</h2>
               <button onClick={onClose} className="hover:text-askari-gold transition-colors"><X size={24} /></button>
             </div>
-            
+
             <div className="flex-1 overflow-y-auto p-6 space-y-6">
               {items.length === 0 ? (
                 <p className="text-white/50 text-center mt-10">Your cart is empty.</p>
@@ -196,7 +196,7 @@ export function Cart({ isOpen, onClose, items, onRemove }: any) {
 
 export function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-  
+
   return (
     <footer className="bg-[#050505] pt-20 pb-10 px-6 border-t border-white/5 relative">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
@@ -218,16 +218,19 @@ export function Footer() {
         <div>
           <h3 className="uppercase tracking-widest text-xs font-semibold mb-6 text-askari-gold">Connect</h3>
           <div className="flex space-x-4 mb-6">
-            <a href="#" className="text-white/70 hover:text-askari-white transition-colors"><Instagram size={20} /></a>
-            <a href="#" className="text-white/70 hover:text-askari-white transition-colors"><Facebook size={20} /></a>
-            <a href="#" className="text-white/70 hover:text-askari-white transition-colors"><Twitter size={20} /></a>
+            <a href="https://www.instagram.com/askariphotography/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-askari-white transition-colors"><Instagram size={20} /></a>
+            <a href="https://www.facebook.com/AskariPhoto/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-askari-white transition-colors"><Facebook size={20} /></a>
           </div>
-          <p className="text-xs text-white/50">Prints shipped nationwide via secure courier.</p>
+          <p className="text-xs text-white/50 mb-2">Prints shipped nationwide via secure courier.</p>
+          <a href="https://wa.me/27714229928" target="_blank" rel="noopener noreferrer" className="text-xs text-askari-gold hover:text-askari-white transition-colors">WhatsApp: +27 071 422 9928</a>
         </div>
       </div>
-      
+
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-xs text-white/40">
-        <p>© {new Date().getFullYear()} Askari Photography. All rights reserved.</p>
+        <div>
+          <p>&copy; 2025 Askari Photo. All rights reserved.</p>
+          <p className="mt-1">All images &copy; Stephen Earle / Askari Photo</p>
+        </div>
         <button onClick={scrollToTop} className="mt-4 md:mt-0 flex items-center gap-2 hover:text-askari-gold transition-colors">
           Back to top <ArrowUp size={14} />
         </button>

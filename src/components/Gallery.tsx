@@ -2,7 +2,81 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ChevronLeft, ChevronRight, ShoppingCart } from 'lucide-react';
 
-const categories = ["Big Five & Predators", "Birdlife", "Landscapes & Sunsets", "Macro & Detail", "Black & White", "Conservation"];
+const cld = (publicId: string, w: number) =>
+  `https://res.cloudinary.com/dkn6tnxao/image/upload/c_scale,q_auto:good,w_${w}/v1/${publicId}`;
+
+const srcSetStr = (publicId: string) =>
+  `${cld(publicId, 400)} 400w, ${cld(publicId, 800)} 800w, ${cld(publicId, 1200)} 1200w, ${cld(publicId, 1920)} 1920w`;
+
+interface GalleryImage {
+  id: string;
+  src: string;
+  title: string;
+  caption: string;
+  info: string;
+  price: number;
+  publicId: string;
+}
+
+const categories = ["Big Five & Predators", "Birdlife", "Landscapes & Sunsets", "Macro & Detail", "Black & White"];
+
+const categoryImages: Record<string, Array<{ publicId: string; title: string; aspect: 'portrait' | 'landscape' }>> = {
+  "Big Five & Predators": [
+    { publicId: 'askari/wildlife/GY8F0535-Edit', title: 'Elephant Crossing', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/EF8A0589', title: 'Elephant Close-up', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/EF8A0504', title: 'Elephant Matriarch', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/GY8F0979', title: 'White Rhino', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/GY8F8469', title: 'Lion Pride', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/GY8F1899', title: 'Buffalo Herd', aspect: 'landscape' },
+    { publicId: 'askari/awards/53240470-468404837', title: 'Leopard at Dusk', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/zebduel', title: 'Zebra Duel', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/GY8F9284-Edit', title: 'African Wild Dog', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/IMG_0031', title: 'Leopard at Rest', aspect: 'portrait' },
+    { publicId: 'askari/wildlife/GY8F0659-Edit', title: 'Young Impala', aspect: 'portrait' },
+    { publicId: 'askari/wildlife/IMG_0189', title: 'Bushveld Guardian', aspect: 'portrait' },
+  ],
+  "Birdlife": [
+    { publicId: 'askari/birdlife/GY8F9931-Edit', title: 'Waterberg Raptor', aspect: 'landscape' },
+    { publicId: 'askari/birdlife/9393101-468405030-2', title: 'Crowned Crane', aspect: 'landscape' },
+    { publicId: 'askari/birdlife/GY8F9803', title: 'Lilac-breasted Roller', aspect: 'portrait' },
+    { publicId: 'askari/birdlife/GY8F8687', title: 'Yellow-billed Hornbill', aspect: 'portrait' },
+    { publicId: 'askari/birdlife/GY8F9280-Edit', title: 'Fish Eagle', aspect: 'landscape' },
+  ],
+  "Landscapes & Sunsets": [
+    { publicId: 'askari/wildlife/GY8F8547-Edit', title: 'Sunset Silhouette', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/20100814_5320-Edit-2', title: 'Golden Grasslands', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/EF8A1304', title: 'Waterberg Ridge', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/20101011_6129', title: 'Kruger Sunset', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/20100910_2400-Edit-5', title: 'Misty Morning', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/20101012_9309 copy', title: 'Panoramic Vista', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/EF8A8300', title: 'Dramatic Horizon', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/GY8F8784', title: 'Savanna Storm', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/GY8F7836', title: 'Bushveld Gold', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/IMG_7729', title: 'African Horizon', aspect: 'landscape' },
+  ],
+  "Macro & Detail": [
+    { publicId: 'askari/wildlife/GY8F5890', title: 'Kudu Bull', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/GY8F1738', title: 'Giraffe Portrait', aspect: 'portrait' },
+    { publicId: 'askari/wildlife/IMG_2402', title: 'Waterberg Dawn', aspect: 'portrait' },
+    { publicId: 'askari/wildlife/EF8A0517', title: 'Morning Light', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/IMG_9123-Edit', title: 'Bushveld Panorama', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/IMG_2568', title: 'Warthog Family', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/GY8F6065', title: 'Cheetah Sprint', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/EF8A2819', title: 'Waterberg Spirit', aspect: 'portrait' },
+    { publicId: 'askari/wildlife/EF8A2983', title: 'Bushveld Majesty', aspect: 'landscape' },
+  ],
+  "Black & White": [
+    { publicId: 'askari/wildlife/20101011_2869', title: 'Hippo Pool', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/GY8F0422', title: 'Jackal Hunt', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/GY8F0826', title: 'Waterhole Encounter', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/GY8F0842', title: 'Bush Sundowner', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/GY8F1326', title: 'Raptor in Flight', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/IMG_5395', title: 'Pride at Dawn', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/IMG_5395-2', title: 'Morning Patrol', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/GY8F2917', title: 'Wild Domain', aspect: 'landscape' },
+    { publicId: 'askari/wildlife/IMG_9778', title: 'Waterberg Twilight', aspect: 'landscape' },
+  ],
+};
 
 const pricing: Record<string, Record<string, number>> = {
   'Fine Art Paper': { 'A3': 1200, 'A2': 2200, 'A1': 3500, 'A0': 5500 },
@@ -11,20 +85,22 @@ const pricing: Record<string, Record<string, number>> = {
   'Digital Download': { 'High-Res': 450 }
 };
 
-const generateImages = (category: string) => {
-  return Array.from({ length: 12 }).map((_, i) => ({
+function buildImages(category: string): GalleryImage[] {
+  const items = categoryImages[category] || [];
+  return items.map((item, i) => ({
     id: `${category.replace(/\s+/g, '-').toLowerCase()}-${i}`,
-    src: `https://picsum.photos/seed/${category.replace(/\s+/g, '')}${i}/800/${Math.random() > 0.5 ? '1000' : '600'}`,
-    title: `${category} Study ${i + 1}`,
-    caption: "Captured in the Greater Kruger region during golden hour.",
-    info: "Nikon Z8 | 400mm f/2.8 | 1/2000s | ISO 640",
-    price: 1200
+    src: cld(item.publicId, 800),
+    title: item.title,
+    caption: "Captured in the Waterberg bushveld, Limpopo.",
+    info: "Canon | Telephoto",
+    price: 1200,
+    publicId: item.publicId,
   }));
-};
+}
 
 export function Gallery({ onAddToCart }: { onAddToCart: (item: any) => void }) {
   const [activeCategory, setActiveCategory] = useState(categories[0]);
-  const [images, setImages] = useState(generateImages(categories[0]));
+  const [images, setImages] = useState(buildImages(categories[0]));
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [format, setFormat] = useState('Fine Art Paper');
   const [size, setSize] = useState('A3');
@@ -41,7 +117,7 @@ export function Gallery({ onAddToCart }: { onAddToCart: (item: any) => void }) {
 
   const handleCategoryChange = (cat: string) => {
     setActiveCategory(cat);
-    setImages(generateImages(cat));
+    setImages(buildImages(cat));
   };
 
   const openLightbox = (i: number) => {
@@ -115,9 +191,16 @@ export function Gallery({ onAddToCart }: { onAddToCart: (item: any) => void }) {
               className="break-inside-avoid cursor-pointer group relative"
               onClick={() => openLightbox(i)}
             >
-              <img src={img.src} alt={img.title} className="w-full h-auto object-cover" loading="lazy" />
+              <img
+                src={img.src}
+                srcSet={srcSetStr(img.publicId)}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                alt={img.title}
+                className="w-full h-auto object-cover"
+                loading="lazy"
+              />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <span className="font-serif text-xl tracking-wider">View</span>
+                <span className="font-serif text-xl tracking-wider">{img.title}</span>
               </div>
             </motion.div>
           ))}
@@ -147,7 +230,13 @@ export function Gallery({ onAddToCart }: { onAddToCart: (item: any) => void }) {
 
             <div className="flex flex-col md:flex-row max-w-6xl w-full max-h-full bg-black/50 border border-white/10 overflow-y-auto" onClick={e => e.stopPropagation()}>
               <div className="w-full md:w-1/2 h-[40vh] md:h-[80vh] flex items-center justify-center p-4 bg-black shrink-0">
-                <img src={images[lightboxIndex].src} alt={images[lightboxIndex].title} className="max-w-full max-h-full object-contain" />
+                <img
+                  src={cld(images[lightboxIndex].publicId, 1200)}
+                  srcSet={srcSetStr(images[lightboxIndex].publicId)}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  alt={images[lightboxIndex].title}
+                  className="max-w-full max-h-full object-contain"
+                />
               </div>
               <div className="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
                 <h3 className="font-serif text-3xl mb-2">{images[lightboxIndex].title}</h3>

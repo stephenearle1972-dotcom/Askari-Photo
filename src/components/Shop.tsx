@@ -2,13 +2,70 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ShoppingCart } from 'lucide-react';
 
-const products = Array.from({ length: 8 }).map((_, i) => ({
-  id: `print-${i}`,
-  src: `https://picsum.photos/seed/shop${i}/800/800`,
-  title: `Waterberg Series ${i + 1}`,
-  basePrice: 1200,
-  description: "A stunning fine art print capturing the essence of the African bushveld. Printed on archival museum-quality paper."
-}));
+const cld = (publicId: string, w: number) =>
+  `https://res.cloudinary.com/dkn6tnxao/image/upload/c_scale,q_auto:good,w_${w}/v1/${publicId}`;
+
+const srcSetStr = (publicId: string) =>
+  `${cld(publicId, 400)} 400w, ${cld(publicId, 800)} 800w, ${cld(publicId, 1200)} 1200w, ${cld(publicId, 1920)} 1920w`;
+
+const products = [
+  {
+    id: 'print-0',
+    publicId: 'askari/awards/IMG_2967-Edit-Edit-Edit-3',
+    title: 'Golden Hour Portrait',
+    basePrice: 1200,
+    description: "An award-winning wildlife portrait captured during golden hour. Printed on archival museum-quality paper with vivid colour reproduction."
+  },
+  {
+    id: 'print-1',
+    publicId: 'askari/wildlife/GY8F0535-Edit',
+    title: 'Elephant Crossing',
+    basePrice: 1200,
+    description: "A magnificent elephant crossing through the Waterberg bushveld. Museum-quality fine art print on archival paper."
+  },
+  {
+    id: 'print-2',
+    publicId: 'askari/wildlife/zebduel',
+    title: 'Zebra Duel',
+    basePrice: 1200,
+    description: "Two zebras locked in a dramatic confrontation. Printed on heavyweight archival paper with exceptional detail."
+  },
+  {
+    id: 'print-3',
+    publicId: 'askari/awards/GY8F6108-Edit',
+    title: 'Golden Light Encounter',
+    basePrice: 1200,
+    description: "An award-winning image bathed in warm golden light. Archival museum-quality print for collectors."
+  },
+  {
+    id: 'print-4',
+    publicId: 'askari/birdlife/GY8F9280-Edit',
+    title: 'Fish Eagle',
+    basePrice: 1200,
+    description: "The iconic African fish eagle in its natural habitat. Fine art print on museum-grade archival paper."
+  },
+  {
+    id: 'print-5',
+    publicId: 'askari/wildlife/EF8A0589',
+    title: 'Elephant Matriarch',
+    basePrice: 1200,
+    description: "A powerful close-up of an elephant matriarch. Printed on archival museum-quality paper with stunning clarity."
+  },
+  {
+    id: 'print-6',
+    publicId: 'askari/wildlife/GY8F8547-Edit',
+    title: 'Bushveld Sunset',
+    basePrice: 1200,
+    description: "A dramatic sunset silhouette across the Waterberg landscape. Museum-quality archival print."
+  },
+  {
+    id: 'print-7',
+    publicId: 'askari/awards/IMG_7673-Edit',
+    title: 'Crowned Eagle Portrait',
+    basePrice: 1200,
+    description: "A striking portrait from the award-winning collection. Premium archival fine art print."
+  },
+];
 
 export function Shop({ onAddToCart }: { onAddToCart: (item: any) => void }) {
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
@@ -37,14 +94,13 @@ export function Shop({ onAddToCart }: { onAddToCart: (item: any) => void }) {
     onAddToCart({
       id: selectedProduct.id,
       title: selectedProduct.title,
-      image: selectedProduct.src,
+      image: cld(selectedProduct.publicId, 400),
       format,
       size: format === 'Digital Download' ? 'High-Res' : size,
       price: currentPrice,
       quantity
     });
     setSelectedProduct(null);
-    // Reset selections
     setFormat('Fine Art Paper');
     setSize('A3');
     setQuantity(1);
@@ -60,7 +116,7 @@ export function Shop({ onAddToCart }: { onAddToCart: (item: any) => void }) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((product, i) => (
-            <motion.div 
+            <motion.div
               key={product.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -70,7 +126,14 @@ export function Shop({ onAddToCart }: { onAddToCart: (item: any) => void }) {
               onClick={() => setSelectedProduct(product)}
             >
               <div className="aspect-square overflow-hidden mb-4 bg-white/5 relative">
-                <img src={product.src} alt={product.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img
+                  src={cld(product.publicId, 800)}
+                  srcSet={srcSetStr(product.publicId)}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  alt={product.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
                 <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <span className="bg-askari-black/80 text-white px-6 py-2 uppercase tracking-widest text-xs border border-white/20">View Options</span>
                 </div>
@@ -84,7 +147,7 @@ export function Shop({ onAddToCart }: { onAddToCart: (item: any) => void }) {
 
       <AnimatePresence>
         {selectedProduct && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -95,22 +158,28 @@ export function Shop({ onAddToCart }: { onAddToCart: (item: any) => void }) {
               <button className="absolute top-4 right-4 text-white/50 hover:text-white z-10" onClick={() => setSelectedProduct(null)}>
                 <X size={24} />
               </button>
-              
+
               <div className="w-full md:w-1/2 bg-black p-8 flex items-center justify-center min-h-[40vh]">
-                <img src={selectedProduct.src} alt={selectedProduct.title} className="max-w-full max-h-[70vh] object-contain shadow-2xl" />
+                <img
+                  src={cld(selectedProduct.publicId, 1200)}
+                  srcSet={srcSetStr(selectedProduct.publicId)}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  alt={selectedProduct.title}
+                  className="max-w-full max-h-[70vh] object-contain shadow-2xl"
+                />
               </div>
-              
+
               <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col">
                 <h3 className="font-serif text-3xl mb-2">{selectedProduct.title}</h3>
                 <p className="text-askari-gold text-xl mb-6">R{currentPrice.toLocaleString()}</p>
                 <p className="text-white/60 text-sm leading-relaxed mb-8">{selectedProduct.description}</p>
-                
+
                 <div className="space-y-6 flex-1">
                   <div>
                     <label className="block text-xs uppercase tracking-widest text-white/50 mb-3">Format</label>
                     <div className="grid grid-cols-2 gap-2">
                       {Object.keys(pricing).map(f => (
-                        <button 
+                        <button
                           key={f}
                           onClick={() => setFormat(f)}
                           className={`py-2 text-sm border transition-colors ${format === f ? 'border-askari-gold text-askari-gold bg-askari-gold/10' : 'border-white/20 text-white/70 hover:border-white/50'}`}
@@ -126,7 +195,7 @@ export function Shop({ onAddToCart }: { onAddToCart: (item: any) => void }) {
                       <label className="block text-xs uppercase tracking-widest text-white/50 mb-3">Size</label>
                       <div className="grid grid-cols-4 gap-2">
                         {['A3', 'A2', 'A1', 'A0'].map(s => (
-                          <button 
+                          <button
                             key={s}
                             onClick={() => setSize(s)}
                             className={`py-2 text-sm border transition-colors ${size === s ? 'border-askari-gold text-askari-gold bg-askari-gold/10' : 'border-white/20 text-white/70 hover:border-white/50'}`}
@@ -149,7 +218,7 @@ export function Shop({ onAddToCart }: { onAddToCart: (item: any) => void }) {
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-white/10">
-                  <button 
+                  <button
                     onClick={handleAddToCart}
                     className="w-full flex items-center justify-center gap-2 bg-askari-gold text-askari-black py-4 uppercase tracking-widest text-sm font-medium hover:bg-askari-white transition-colors mb-4"
                   >
