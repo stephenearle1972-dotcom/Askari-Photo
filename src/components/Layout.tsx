@@ -84,7 +84,7 @@ export function Navbar({ cartCount, onOpenCart }: { cartCount: number, onOpenCar
           </div>
 
           <div className="md:hidden flex items-center space-x-4">
-            <button onClick={onOpenCart} className="relative p-2">
+            <button onClick={onOpenCart} className="relative p-3">
               <ShoppingCart size={20} />
               {cartCount > 0 && (
                 <span className="absolute top-0 right-0 bg-askari-amber text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
@@ -92,7 +92,7 @@ export function Navbar({ cartCount, onOpenCart }: { cartCount: number, onOpenCar
                 </span>
               )}
             </button>
-            <button onClick={() => setIsMobileMenuOpen(true)}>
+            <button onClick={() => setIsMobileMenuOpen(true)} className="p-2.5">
               <Menu size={24} />
             </button>
           </div>

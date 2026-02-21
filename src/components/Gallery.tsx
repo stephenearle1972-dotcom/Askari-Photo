@@ -4,7 +4,7 @@ import { X, ChevronLeft, ChevronRight, ShoppingCart } from 'lucide-react';
 import { galleryCategories, galleryCategoryNames } from '../data/catalog';
 
 const cld = (publicId: string, w: number) =>
-  `https://res.cloudinary.com/dkn6tnxao/image/upload/c_scale,q_auto:good,w_${w}/v1/${publicId}`;
+  `https://res.cloudinary.com/dkn6tnxao/image/upload/f_auto,c_scale,q_auto:good,w_${w}/v1/${publicId}`;
 
 const srcSetStr = (publicId: string) =>
   `${cld(publicId, 400)} 400w, ${cld(publicId, 800)} 800w, ${cld(publicId, 1200)} 1200w, ${cld(publicId, 1920)} 1920w`;
@@ -103,12 +103,12 @@ export function Gallery({ onAddToCart }: { onAddToCart: (item: any) => void }) {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-white/10 pb-6">
           <h2 className="font-serif text-4xl mb-6 md:mb-0">The Gallery</h2>
-          <div className="flex overflow-x-auto no-scrollbar gap-6 w-full md:w-auto pb-2">
+          <div className="flex overflow-x-auto no-scrollbar gap-3 md:gap-6 w-full md:w-auto pb-2">
             {galleryCategoryNames.map(cat => (
               <button
                 key={cat}
                 onClick={() => handleCategoryChange(cat)}
-                className={`whitespace-nowrap uppercase tracking-widest text-xs transition-colors ${activeCategory === cat ? 'text-askari-gold' : 'text-white/50 hover:text-white'}`}
+                className={`whitespace-nowrap uppercase tracking-wider md:tracking-widest text-xs transition-colors min-h-[44px] flex items-center ${activeCategory === cat ? 'text-askari-gold' : 'text-white/50 hover:text-white'}`}
               >
                 {cat}
               </button>
@@ -121,7 +121,7 @@ export function Gallery({ onAddToCart }: { onAddToCart: (item: any) => void }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6"
+          className="columns-1 sm:columns-2 lg:columns-3 gap-3 sm:gap-6 space-y-3 sm:space-y-6"
         >
           {images.map((img, i) => (
             <motion.div
@@ -162,12 +162,12 @@ export function Gallery({ onAddToCart }: { onAddToCart: (item: any) => void }) {
               <X size={32} />
             </button>
 
-            <button className="absolute left-6 top-1/2 -translate-y-1/2 text-white/50 hover:text-white z-10 p-4" onClick={prevImage}>
-              <ChevronLeft size={48} strokeWidth={1} />
+            <button className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 text-white/50 hover:text-white z-10 p-4" onClick={prevImage}>
+              <ChevronLeft size={36} strokeWidth={1} className="sm:w-12 sm:h-12" />
             </button>
 
-            <button className="absolute right-6 top-1/2 -translate-y-1/2 text-white/50 hover:text-white z-10 p-4" onClick={nextImage}>
-              <ChevronRight size={48} strokeWidth={1} />
+            <button className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 text-white/50 hover:text-white z-10 p-4" onClick={nextImage}>
+              <ChevronRight size={36} strokeWidth={1} className="sm:w-12 sm:h-12" />
             </button>
 
             <div className="flex flex-col md:flex-row max-w-6xl w-full max-h-full bg-black/50 border border-white/10 overflow-y-auto" onClick={e => e.stopPropagation()}>
@@ -180,8 +180,8 @@ export function Gallery({ onAddToCart }: { onAddToCart: (item: any) => void }) {
                   className="max-w-full max-h-full object-contain"
                 />
               </div>
-              <div className="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
-                <h3 className="font-serif text-3xl mb-2">{images[lightboxIndex].title}</h3>
+              <div className="w-full md:w-1/2 p-4 sm:p-6 md:p-8 flex flex-col justify-center">
+                <h3 className="font-serif text-2xl sm:text-3xl mb-2">{images[lightboxIndex].title}</h3>
                 <p className="text-askari-gold text-xl mb-4">R{currentPrice.toLocaleString()}</p>
                 <p className="text-white/70 mb-4 text-sm leading-relaxed">{images[lightboxIndex].caption}</p>
                 <div className="text-xs text-white/40 tracking-widest uppercase mb-6 space-y-2">
@@ -197,7 +197,7 @@ export function Gallery({ onAddToCart }: { onAddToCart: (item: any) => void }) {
                         <button
                           key={f}
                           onClick={() => setFormat(f)}
-                          className={`py-2 text-xs border transition-colors ${format === f ? 'border-askari-gold text-askari-gold bg-askari-gold/10' : 'border-white/20 text-white/70 hover:border-white/50'}`}
+                          className={`py-2 min-h-[44px] text-xs border transition-colors ${format === f ? 'border-askari-gold text-askari-gold bg-askari-gold/10' : 'border-white/20 text-white/70 hover:border-white/50'}`}
                         >
                           {f}
                         </button>
@@ -208,12 +208,12 @@ export function Gallery({ onAddToCart }: { onAddToCart: (item: any) => void }) {
                   {format !== 'Digital Download' && (
                     <div>
                       <label className="block text-xs uppercase tracking-widest text-white/50 mb-2">Size</label>
-                      <div className="grid grid-cols-4 gap-2">
+                      <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                         {['A3', 'A2', 'A1', 'A0'].map(s => (
                           <button
                             key={s}
                             onClick={() => setSize(s)}
-                            className={`py-2 text-xs border transition-colors ${size === s ? 'border-askari-gold text-askari-gold bg-askari-gold/10' : 'border-white/20 text-white/70 hover:border-white/50'}`}
+                            className={`py-2 min-h-[44px] text-xs border transition-colors ${size === s ? 'border-askari-gold text-askari-gold bg-askari-gold/10' : 'border-white/20 text-white/70 hover:border-white/50'}`}
                           >
                             {s}
                           </button>

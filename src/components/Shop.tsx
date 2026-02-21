@@ -4,7 +4,7 @@ import { X, ShoppingCart } from 'lucide-react';
 import { fineArtPrints, colourPrints } from '../data/catalog';
 
 const cld = (publicId: string, w: number) =>
-  `https://res.cloudinary.com/dkn6tnxao/image/upload/c_scale,q_auto:good,w_${w}/v1/${publicId}`;
+  `https://res.cloudinary.com/dkn6tnxao/image/upload/f_auto,c_scale,q_auto:good,w_${w}/v1/${publicId}`;
 
 const srcSetStr = (publicId: string) =>
   `${cld(publicId, 400)} 400w, ${cld(publicId, 800)} 800w, ${cld(publicId, 1200)} 1200w, ${cld(publicId, 1920)} 1920w`;
@@ -18,7 +18,7 @@ const pricing: Record<string, Record<string, number>> = {
 
 function ProductGrid({ products, onSelect }: { products: typeof fineArtPrints; onSelect: (p: any) => void }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
       {products.map((product, i) => (
         <motion.div
           key={product.id}
@@ -89,7 +89,7 @@ export function Shop({ onAddToCart }: { onAddToCart: (item: any) => void }) {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="font-serif text-4xl mb-4">Fine Art Prints</h2>
-            <p className="text-white/60 tracking-widest uppercase text-sm">Museum-quality black & white prints for your home, lodge, or office</p>
+            <p className="text-white/60 tracking-wider md:tracking-widest uppercase text-sm">Museum-quality black & white prints for your home, lodge, or office</p>
           </div>
           <ProductGrid products={fineArtPrints} onSelect={setSelectedProduct} />
         </div>
@@ -100,7 +100,7 @@ export function Shop({ onAddToCart }: { onAddToCart: (item: any) => void }) {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="font-serif text-4xl mb-4">Colour Prints</h2>
-            <p className="text-white/60 tracking-widest uppercase text-sm">Vivid wildlife prints celebrating the colours of Africa</p>
+            <p className="text-white/60 tracking-wider md:tracking-widest uppercase text-sm">Vivid wildlife prints celebrating the colours of Africa</p>
           </div>
           <ProductGrid products={colourPrints} onSelect={setSelectedProduct} />
         </div>
@@ -121,7 +121,7 @@ export function Shop({ onAddToCart }: { onAddToCart: (item: any) => void }) {
                 <X size={24} />
               </button>
 
-              <div className="w-full md:w-1/2 bg-black p-8 flex items-center justify-center min-h-[40vh]">
+              <div className="w-full md:w-1/2 bg-black p-4 sm:p-8 flex items-center justify-center min-h-[40vh]">
                 <img
                   src={cld(selectedProduct.publicId, 1200)}
                   srcSet={srcSetStr(selectedProduct.publicId)}
@@ -131,8 +131,8 @@ export function Shop({ onAddToCart }: { onAddToCart: (item: any) => void }) {
                 />
               </div>
 
-              <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col">
-                <h3 className="font-serif text-3xl mb-2">{selectedProduct.title}</h3>
+              <div className="w-full md:w-1/2 p-4 sm:p-8 md:p-12 flex flex-col">
+                <h3 className="font-serif text-2xl sm:text-3xl mb-2">{selectedProduct.title}</h3>
                 <p className="text-askari-gold text-xl mb-6">R{currentPrice.toLocaleString()}</p>
                 <p className="text-white/60 text-sm leading-relaxed mb-8">{selectedProduct.description}</p>
 
@@ -144,7 +144,7 @@ export function Shop({ onAddToCart }: { onAddToCart: (item: any) => void }) {
                         <button
                           key={f}
                           onClick={() => setFormat(f)}
-                          className={`py-2 text-sm border transition-colors ${format === f ? 'border-askari-gold text-askari-gold bg-askari-gold/10' : 'border-white/20 text-white/70 hover:border-white/50'}`}
+                          className={`py-2 min-h-[44px] text-sm border transition-colors ${format === f ? 'border-askari-gold text-askari-gold bg-askari-gold/10' : 'border-white/20 text-white/70 hover:border-white/50'}`}
                         >
                           {f}
                         </button>
@@ -155,12 +155,12 @@ export function Shop({ onAddToCart }: { onAddToCart: (item: any) => void }) {
                   {format !== 'Digital Download' && (
                     <div>
                       <label className="block text-xs uppercase tracking-widest text-white/50 mb-3">Size</label>
-                      <div className="grid grid-cols-4 gap-2">
+                      <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                         {['A3', 'A2', 'A1', 'A0'].map(s => (
                           <button
                             key={s}
                             onClick={() => setSize(s)}
-                            className={`py-2 text-sm border transition-colors ${size === s ? 'border-askari-gold text-askari-gold bg-askari-gold/10' : 'border-white/20 text-white/70 hover:border-white/50'}`}
+                            className={`py-2 min-h-[44px] text-sm border transition-colors ${size === s ? 'border-askari-gold text-askari-gold bg-askari-gold/10' : 'border-white/20 text-white/70 hover:border-white/50'}`}
                           >
                             {s}
                           </button>

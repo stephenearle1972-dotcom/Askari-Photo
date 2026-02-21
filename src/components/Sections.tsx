@@ -4,7 +4,7 @@ import { Camera, MapPin, Mail, Phone, Heart, Instagram as InstagramIcon } from '
 import { behindLensBlocks, instagramGrid } from '../data/catalog';
 
 const cld = (publicId: string, w: number) =>
-  `https://res.cloudinary.com/dkn6tnxao/image/upload/c_scale,q_auto:good,w_${w}/v1/${publicId}`;
+  `https://res.cloudinary.com/dkn6tnxao/image/upload/f_auto,c_scale,q_auto:good,w_${w}/v1/${publicId}`;
 
 const srcSet = (publicId: string) =>
   `${cld(publicId, 400)} 400w, ${cld(publicId, 800)} 800w, ${cld(publicId, 1200)} 1200w, ${cld(publicId, 1920)} 1920w`;
@@ -20,6 +20,7 @@ export function Hero() {
           srcSet={srcSet(HERO_IMAGE)}
           sizes="100vw"
           alt="Award-winning wildlife photography by Stephen Earle"
+          fetchPriority="high"
           className="w-full h-full object-cover animate-kenburns opacity-60"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-askari-black" />
@@ -30,7 +31,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.5 }}
-          className="font-serif text-5xl md:text-8xl tracking-[0.3em] uppercase mb-6"
+          className="font-serif text-5xl md:text-8xl tracking-[0.15em] md:tracking-[0.3em] uppercase mb-6"
         >
           Askari
         </motion.h1>
@@ -38,7 +39,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 1.5 }}
-          className="text-sm md:text-lg tracking-[0.2em] uppercase text-askari-gold mb-8"
+          className="text-sm md:text-lg tracking-[0.1em] md:tracking-[0.2em] uppercase text-askari-gold mb-8"
         >
           Wildlife & Nature Photography
         </motion.p>
@@ -117,10 +118,10 @@ export function Awards() {
   return (
     <section id="awards" className="py-24 bg-[#0A0A0A] border-y border-white/5 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 mb-12">
-        <h2 className="font-serif text-3xl tracking-widest uppercase text-center">Recognition</h2>
+        <h2 className="font-serif text-3xl tracking-wider md:tracking-widest uppercase text-center">Recognition</h2>
       </div>
 
-      <div className="relative w-full flex overflow-x-auto no-scrollbar snap-x snap-mandatory pb-8 pl-6 pr-6 md:pl-12 md:pr-12 gap-6 scroll-pl-6 md:scroll-pl-12">
+      <div className="relative w-full flex overflow-x-auto no-scrollbar snap-x snap-mandatory pb-8 pl-4 pr-4 md:pl-12 md:pr-12 gap-4 md:gap-6 scroll-pl-4 md:scroll-pl-12">
         {awards.map((award, i) => (
           <motion.div
             key={i}
@@ -128,7 +129,7 @@ export function Awards() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: i * 0.1 }}
-            className="min-w-[280px] md:min-w-[350px] snap-center bg-askari-black border border-askari-gold/20 p-8 flex items-center justify-center text-center h-40 touch-pan-x"
+            className="min-w-[260px] md:min-w-[340px] snap-center bg-askari-black border border-askari-gold/20 p-6 md:p-8 flex items-center justify-center text-center h-40 touch-pan-x"
           >
             <p className="font-serif text-lg text-askari-white/90">{award}</p>
           </motion.div>
