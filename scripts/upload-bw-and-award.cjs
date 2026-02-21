@@ -3,9 +3,9 @@ const path = require('path');
 const fs = require('fs');
 
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'dkn6tnxao',
-  api_key: process.env.CLOUDINARY_API_KEY || '121616344851181',
-  api_secret: process.env.CLOUDINARY_API_SECRET || 'K34zGV_nBEP6kBLrHyQRZCIOOu0',
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 const BW_DIR = 'F:/My Drive/Askari Photography/Website Ready/Black & White';

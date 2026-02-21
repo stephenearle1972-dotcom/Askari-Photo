@@ -5,9 +5,9 @@ const path = require('path');
 const os = require('os');
 
 cloudinary.config({
-  cloud_name: 'dkn6tnxao',
-  api_key: '121616344851181',
-  api_secret: 'K34zGV_nBEP6kBLrHyQRZCIOOu0',
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 const filePath = 'F:/My Drive/Askari Photography/Awards/Untitled Export/20101012_8658.jpg';
