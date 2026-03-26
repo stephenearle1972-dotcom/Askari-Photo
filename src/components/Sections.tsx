@@ -19,7 +19,7 @@ export function Hero() {
           src={cld(HERO_IMAGE, 1920)}
           srcSet={srcSet(HERO_IMAGE)}
           sizes="100vw"
-          alt="Award-winning wildlife photography by Stephen Earle"
+          alt="African Spoonbill bursting from water in dramatic splash"
           fetchPriority="high"
           className="w-full h-full object-cover animate-kenburns opacity-60"
         />
@@ -161,7 +161,7 @@ export function BehindLens() {
                     src={cld(block.publicId, 800)}
                     srcSet={srcSet(block.publicId)}
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    alt="Behind the lens"
+                    alt={block.alt}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
