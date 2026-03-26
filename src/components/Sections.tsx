@@ -19,7 +19,7 @@ export function Hero() {
           src={cld(HERO_IMAGE, 1920)}
           srcSet={srcSet(HERO_IMAGE)}
           sizes="100vw"
-          alt="African Spoonbill bursting from water in dramatic splash"
+          alt="Two sandpipers fighting in dramatic water splash"
           fetchPriority="high"
           className="w-full h-full object-cover animate-kenburns opacity-60"
         />

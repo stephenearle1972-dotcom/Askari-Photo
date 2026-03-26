@@ -14,7 +14,7 @@ export const galleryCategories: Record<string, CatalogImage[]> = {
   Awards: [
     { publicId: 'askari/awards/cheetah-family-climbing-tree-masai-mara', title: 'Cheetah Family on Fallen Tree, Masai Mara', aspect: 'portrait' },
     { publicId: 'askari/awards/GY8F6108-Edit', title: 'Ostrich Chick Among Adult\'s Legs on Burnt Ground', aspect: 'landscape' },
-    { publicId: 'askari/awards/IMG_2967-Edit-Edit-Edit-3', title: 'African Spoonbill Erupting from Water', aspect: 'portrait' },
+    { publicId: 'askari/awards/IMG_2967-Edit-Edit-Edit-3', title: 'Sandpipers Fighting', aspect: 'portrait' },
     { publicId: 'askari/awards/IMG_7673-Edit', title: 'Cape Vulture & Black-backed Jackal', aspect: 'portrait' },
     { publicId: 'askari/awards/53240470-468404837', title: 'Spoonbill in Flight', aspect: 'landscape' },
   ],
@@ -125,9 +125,9 @@ export const fineArtPrints = [
   {
     id: 'bw-6',
     publicId: 'askari/black-white/heron-silhouette-in-flight-backlit-01',
-    title: 'Heron in Flight — Backlit Golden Wings',
+    title: 'African Spoonbill in Flight — Backlit Golden Wings',
     basePrice: 1200,
-    description: 'A heron in flight with wings backlit by golden light, revealing translucent feather detail. Archival museum-quality print.',
+    description: 'An African spoonbill in flight with wings backlit by golden light, revealing translucent feather detail. Archival museum-quality print.',
   },
   {
     id: 'bw-7',
