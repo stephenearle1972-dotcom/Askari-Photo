@@ -55,7 +55,7 @@ export const galleryCategories: Record<string, CatalogImage[]> = {
     { publicId: 'askari/black-white/burchells-zebra-stallions-fighting-dust-01', title: 'Zebra Stallions Fighting', aspect: 'landscape' },
     { publicId: 'askari/black-white/plains-zebra-family-running-grassland-01', title: 'Zebra Family Running', aspect: 'landscape' },
     { publicId: 'askari/black-white/blue-wildebeest-herd-silhouette-sunset-01', title: 'Wildebeest Silhouette at Sunset', aspect: 'landscape' },
-    { publicId: 'askari/black-white/heron-silhouette-in-flight-backlit-01', title: 'Heron Silhouette in Flight', aspect: 'landscape' },
+    { publicId: 'askari/black-white/heron-silhouette-in-flight-backlit-01', title: 'African Spoonbill Silhouette', aspect: 'landscape' },
     { publicId: 'askari/black-white/EF8A0973-Edit', title: 'Wildlife Portrait I', aspect: 'landscape' },
     { publicId: 'askari/black-white/EF8A2310-Edit', title: 'Wildlife Portrait II', aspect: 'portrait' },
     { publicId: 'askari/black-white/EF8A4422-Edit', title: 'Wildlife Landscape I', aspect: 'landscape' },
@@ -125,9 +125,9 @@ export const fineArtPrints = [
   {
     id: 'bw-6',
     publicId: 'askari/black-white/heron-silhouette-in-flight-backlit-01',
-    title: 'Heron Silhouette in Flight',
+    title: 'African Spoonbill Silhouette',
     basePrice: 1200,
-    description: 'A heron in flight, silhouetted against a luminous backlit sky with translucent wing detail. Archival museum-quality print.',
+    description: 'An African spoonbill in flight, silhouetted against a luminous backlit sky. Archival museum-quality print.',
   },
   {
     id: 'bw-7',
