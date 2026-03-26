@@ -15,7 +15,7 @@ export const galleryCategories: Record<string, CatalogImage[]> = {
     { publicId: 'askari/awards/cheetah-family-climbing-tree-masai-mara', title: 'Cheetah Family Climbing Tree', aspect: 'portrait' },
     { publicId: 'askari/awards/GY8F6108-Edit', title: 'Ostrich Chick Portrait', aspect: 'landscape' },
     { publicId: 'askari/awards/IMG_2967-Edit-Edit-Edit-3', title: 'Sandpipers Fighting', aspect: 'portrait' },
-    { publicId: 'askari/awards/IMG_7673-Edit', title: 'African Spoonbill Silhouette', aspect: 'portrait' },
+    { publicId: 'askari/awards/IMG_7673-Edit', title: 'Cape Vulture & Black-backed Jackal', aspect: 'portrait' },
     { publicId: 'askari/awards/53240470-468404837', title: 'Spoonbill in Flight', aspect: 'landscape' },
   ],
 
@@ -55,7 +55,7 @@ export const galleryCategories: Record<string, CatalogImage[]> = {
     { publicId: 'askari/black-white/burchells-zebra-stallions-fighting-dust-01', title: 'Zebra Stallions Fighting', aspect: 'landscape' },
     { publicId: 'askari/black-white/plains-zebra-family-running-grassland-01', title: 'Zebra Family Running', aspect: 'landscape' },
     { publicId: 'askari/black-white/blue-wildebeest-herd-silhouette-sunset-01', title: 'Wildebeest Silhouette at Sunset', aspect: 'landscape' },
-    { publicId: 'askari/black-white/heron-silhouette-in-flight-backlit-01', title: 'African Spoonbill Silhouette', aspect: 'landscape' },
+    { publicId: 'askari/black-white/heron-silhouette-in-flight-backlit-01', title: 'Heron Silhouette in Flight', aspect: 'landscape' },
     { publicId: 'askari/black-white/EF8A0973-Edit', title: 'Wildlife Portrait I', aspect: 'landscape' },
     { publicId: 'askari/black-white/EF8A2310-Edit', title: 'Wildlife Portrait II', aspect: 'portrait' },
     { publicId: 'askari/black-white/EF8A4422-Edit', title: 'Wildlife Landscape I', aspect: 'landscape' },
@@ -125,9 +125,9 @@ export const fineArtPrints = [
   {
     id: 'bw-6',
     publicId: 'askari/black-white/heron-silhouette-in-flight-backlit-01',
-    title: 'African Spoonbill Silhouette',
+    title: 'Heron Silhouette in Flight',
     basePrice: 1200,
-    description: 'An African spoonbill in flight, silhouetted against a luminous backlit sky. Archival museum-quality print.',
+    description: 'A heron in flight, silhouetted against a luminous backlit sky with translucent wing detail. Archival museum-quality print.',
   },
   {
     id: 'bw-7',
