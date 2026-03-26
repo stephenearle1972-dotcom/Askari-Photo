@@ -234,6 +234,13 @@ export const fineArtPrints = [
     basePrice: 1200,
     description: 'An elephant mother and her small calf walking toward the camera in high-key black and white. Museum-quality archival print.',
   },
+  {
+    id: 'bw-22',
+    publicId: 'askari/wildlife/GY8F8547-Edit',
+    title: 'Elephant Herd at Waterhole — Wide View',
+    basePrice: 1200,
+    description: 'A large elephant breeding herd gathered at a waterhole in the dry bushveld. Panoramic archival museum-quality print.',
+  },
 ];
 
 // ── Colour Prints (Shop) ────────────────────────────────────────────────
@@ -297,13 +304,6 @@ export const colourPrints = [
     description: 'A white rhinoceros calf charging through golden grass. Printed on heavyweight archival paper with exceptional detail.',
   },
   // New additions from unused Cloudinary images
-  {
-    id: 'colour-8',
-    publicId: 'askari/wildlife/GY8F8547-Edit',
-    title: 'Elephant Herd at Waterhole — Wide View',
-    basePrice: 1200,
-    description: 'A large elephant breeding herd gathered at a waterhole in the dry bushveld. Panoramic archival museum-quality print.',
-  },
   {
     id: 'colour-9',
     publicId: 'askari/wildlife/IMG_9123-Edit',
